@@ -1,12 +1,28 @@
-function DeleteMe() {
-  document.getElementById("myResult").value = "";
+let currentInput = "";
+
+function calculator(value) {
+    currentInput += value;
+    document.getElementById("myResult").value = currentInput;
 }
 
-function calculator(NewValue) {
-  document.getElementById("myResult").value += NewValue;
+function DeleteMe() {
+    currentInput = "";
+    document.getElementById("myResult").value = currentInput;
 }
+
+function canCle() {
+    currentInput = currentInput.slice(0, -1); // Remove the last character
+    document.getElementById("myResult").value = currentInput;
+}
+
 function AnsWer() {
-  const a = document.getElementById("myResult").value;
-  const b = eval(a);
-  document.getElementById("myResult").value = b;
+    try {
+        // Evaluate the expression
+        const result = eval(currentInput);
+        document.getElementById("myResult").value = result;
+        currentInput = result.toString(); // Update currentInput to the result
+    } catch (error) {
+        document.getElementById("myResult").value = "Error";
+        currentInput = ""; // Reset currentInput on error
+    }
 }
